@@ -4,6 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+/**
+ * MainActivity Class for the NCAABDashboard App
+ * @author - Alan Poblette
+ * @author - Dustin Cassell
+ * @author - Joshua Seward
+ * @version - 1.0.0
+ * Pennant Image - Icons made by Freepik (https://www.freepik.com) from https://www.flaticon.com/
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
