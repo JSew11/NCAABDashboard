@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     List<NewsStory> stories;
     // GUI objects
     private RecyclerView recyclerView;
+    private View gameView;
+    private Button findTickets;
+    private Button whereToWatch;
 
     /**
      * onCreate method called when starting the app
@@ -59,6 +63,42 @@ public class MainActivity extends AppCompatActivity {
         // wire up CustomAdapter
         CustomAdapter adapter = new CustomAdapter();
         recyclerView.setAdapter(adapter);
+
+        // set up gameView onClick method
+        gameView = findViewById(R.id.GameCardView);
+        gameView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "TODO - have GameView redirect to " +
+                        "another activity", Toast.LENGTH_SHORT).show();
+                // TODO - set up onClick method to redirect to an in-depth game view activity
+            }
+        });
+
+        // set up findTickets button
+        findTickets = findViewById(R.id.FindTickets);
+        findTickets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "TODO - have FindTickets redirect " +
+                        "to a place to buy tickets", Toast.LENGTH_SHORT).show();
+                // TODO - set up onClick method to redirect to ticketmaster (an activity to set up
+                //  ticketmaster search?)
+            }
+        });
+
+        // set up whereToWatch button
+        whereToWatch = findViewById(R.id.WhereToWatch);
+        whereToWatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "TODO - have WhereToWatch redirect " +
+                        "to a map activity", Toast.LENGTH_SHORT).show();
+                // TODO - set up onClick method to redirect to map activity through an alert dialog
+                //  (ask if they have tickets - if so then locate venue / if not then locate other
+                //  place to watch like a restaurant/bar)
+            }
+        });
     }
 
     /**
