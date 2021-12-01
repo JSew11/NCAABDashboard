@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 // TODO - Have search bar connect with Google API and provide search results
+                //  (use this as the text watcher)
                 return false;
             }
         });
