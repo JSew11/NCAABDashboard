@@ -12,4 +12,5 @@
     <string name="find_tickets">Find Tickets</string>
     <string name="news_headline">News Headline</string>
     <string name="source_url">Source: URL</string>
+    <string name="news_story_synopsis">News Story Synopsis</string>
 </resources>

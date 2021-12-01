@@ -31,6 +31,14 @@
             card_view:srcCompat="@drawable/placeholder" />
 
         <TextView
+            android:id="@+id/NewsSynopsis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/news_story_synopsis"
+            android:textSize="15sp"
+            android:textAlignment="center" />
+
+        <TextView
             android:id="@+id/NewsSource"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

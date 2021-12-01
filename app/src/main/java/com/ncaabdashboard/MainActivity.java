@@ -3,6 +3,7 @@ package com.ncaabdashboard;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.Placeholder;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * MainActivity Class for the NCAABDashboard App
@@ -25,6 +30,9 @@ import android.widget.TextView;
  */
 public class MainActivity extends AppCompatActivity {
     protected String TAG = "MainActivityTag";
+    protected int PLACEHOLDER_ID = R.drawable.placeholder;
+    // static data source for demo
+    List<NewsStory> stories;
     // GUI objects
     private RecyclerView recyclerView;
 
@@ -37,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // set up static data source for demo
+        stories = new ArrayList<NewsStory>();
+        stories.add(new NewsStory("NCAA Basketball News", PLACEHOLDER_ID,
+                "Something happened in College basketball", "www.google.com"));
 
         // set up RecyclerView
         recyclerView = findViewById(R.id.NewsStories);
@@ -57,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         CardView newsStoryCardView;
         TextView newsHeadline;
         ImageView newsImage;
+        TextView newsSynopsis;
         TextView newsSource;
 
         /**
@@ -76,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 newsStoryCardView = itemView.findViewById(R.id.NewsStoryCardView);
                 newsHeadline = itemView.findViewById(R.id.NewsHeadline);
                 newsImage = itemView.findViewById(R.id.NewsImage);
+                newsSynopsis = itemView.findViewById(R.id.NewsSynopsis);
                 newsSource = itemView.findViewById(R.id.NewsSource);
 
                 // link up click listener
@@ -84,10 +99,13 @@ public class MainActivity extends AppCompatActivity {
 
             /**
              * Method that updates the view of the RecyclerView with a given News Story
+             * @param newsStory - NewsStory object that is being updated in the RecyclerView
              */
             public void updateView(NewsStory newsStory) {
-                // TODO - Write updateView so it properly displays the news story card in the
-                //  RecyclerView
+                newsHeadline.setText(newsStory.getTitle());
+                newsImage.setImageResource(newsStory.getImageId());
+                newsSynopsis.setText(newsStory.getSynopsis());
+                newsSource.setText(newsStory.getUrlLink());
             }
 
             /**
@@ -98,7 +116,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onCLick: ");
-                // TODO - Finish onCLick method to redirect to the news story
+                Toast.makeText(MainActivity.this, "TODO - redirect to News Story URL",
+                        Toast.LENGTH_SHORT).show();
+                // TODO - Finish onCLick method to redirect to the news story using the URL
             }
         }
 
@@ -125,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
          */
         @Override
         public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+            NewsStory newsStory = stories.get(position); // get the NewsStory object at position
+            holder.updateView(newsStory); // update the view with the info from 'newsStory'
             // TODO - Finish onBindViewHolder to bind data from database to RecyclerView using
             //  CustomViewHolder.updateView()
         }
@@ -135,8 +157,8 @@ public class MainActivity extends AppCompatActivity {
          */
         @Override
         public int getItemCount() {
-            // TODO - Finish getItemCount
-            return 0;
+            // TODO - Implement getItemCount with database
+            return stories.size();
         }
     }
 }
