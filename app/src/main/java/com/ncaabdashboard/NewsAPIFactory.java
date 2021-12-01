@@ -29,6 +29,7 @@ public class NewsAPIFactory {
         try {
             // setup connection
             RequestQueue queue = Volley.newRequestQueue(context);
+            queue.cancelAll(TAG_SEARCH_NEWS);
 
             StringRequest stringRequest = searchNameStringRequest(university, context);
             stringRequest.setTag(TAG_SEARCH_NEWS);
@@ -63,6 +64,8 @@ public class NewsAPIFactory {
                     // SUCCESS
                     @Override
                     public void onResponse(String response) {
+
+                        //TODO: in response, need to create new news story to display?
                         Toast.makeText(context, "Got response from newsapi", Toast.LENGTH_LONG).show();
 
                         // try/catch block for returned JSON data
