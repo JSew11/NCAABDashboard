@@ -4,7 +4,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/movieCardView"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
     card_view:cardElevation="8dp"
     card_view:cardCornerRadius="4dp"
@@ -20,8 +20,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/news_headline"
+            android:textSize="25sp"
             android:textAlignment="center" />
 
+        <ImageView
+            android:id="@+id/NewsImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            card_view:srcCompat="@drawable/placeholder" />
+
+        <TextView
+            android:id="@+id/NewsSource"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/source_url"
+            android:textSize="11sp"
+            android:textAlignment="center" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

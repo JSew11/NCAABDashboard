@@ -11,4 +11,5 @@
     <string name="where_to_watch">Where to Watch</string>
     <string name="find_tickets">Find Tickets</string>
     <string name="news_headline">News Headline</string>
+    <string name="source_url">Source: URL</string>
 </resources>
