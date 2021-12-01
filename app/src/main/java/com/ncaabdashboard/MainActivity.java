@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                Toast.makeText(MainActivity.this, "TODO - have the search bar make a " +
+                        "Google search using the given input", Toast.LENGTH_SHORT).show();
                 // TODO - Have search bar connect with Google API and provide search results
                 //  (use this as the text watcher)
                 return false;
