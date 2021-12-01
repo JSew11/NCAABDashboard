@@ -1,0 +1,2 @@
+# url that could be used for recent gonzaga news
+https://newsapi.org/v2/everything?q=%22gonzaga%20basketball%22&sortBy=popularity&from=2021-11-23&apiKey=01d0758178cb4734bdd33854b2eea5ca
