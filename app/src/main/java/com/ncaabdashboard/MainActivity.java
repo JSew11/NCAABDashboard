@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.StringRequest;
+
 /**
  * MainActivity Class for the NCAABDashboard App
  * @author - Alan Poblette
@@ -46,6 +48,17 @@ public class MainActivity extends AppCompatActivity {
         // wire up CustomAdapter
         CustomAdapter adapter = new CustomAdapter();
         recyclerView.setAdapter(adapter);
+
+        // demo loading a news story from an api
+        loadNewsStory();
+    }
+
+    /**
+     * Private method to make an api call and create a new news story in our demo
+     */
+    private void loadNewsStory() {
+        // call method to get latest news by university
+        StringRequest response = NewsAPIFactory.getLatestNewsByUniversity(this, "Gonzaga");
     }
 
     /**
