@@ -9,11 +9,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
     // static data source for demo
     List<NewsStory> stories;
     // GUI objects
-    private RecyclerView recyclerView;
+    private EditText searchBar;
     private View gameView;
+    private RecyclerView recyclerView;
     private Button findTickets;
     private Button whereToWatch;
 
@@ -50,10 +57,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // set up static data source for demo
+        // set up static NewsStory data source for demo
         stories = new ArrayList<NewsStory>();
         stories.add(new NewsStory("NCAA Basketball News", PLACEHOLDER_ID,
                 "Something happened in College basketball", "www.google.com"));
+        stories.add(new NewsStory("More NCAA Basketball News", PLACEHOLDER_ID,
+                "Something else happened in College basketball", "www.google.com"));
+
+        // set up SearchBar
+        searchBar = findViewById(R.id.SearchBar);
+        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                // TODO - Have search bar connect with Google API and provide search results
+                return false;
+            }
+        });
 
         // set up RecyclerView
         recyclerView = findViewById(R.id.NewsStories);
@@ -200,5 +219,35 @@ public class MainActivity extends AppCompatActivity {
             // TODO - Implement getItemCount with database
             return stories.size();
         }
+    }
+
+    /**
+     * Method that inflates main_menu.xml on to the Main Activity
+     * @param menu - menu object to inflate main_menu.xml onto
+     * @return - super.onCreateOptionsMenu(menu)
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /**
+     * Method to handle when the user clicks on a menu option
+     * @param item - the MenuItem object that was clicked on
+     * @return - super.onOptionsItemSelected(item)
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        // switch on the itemId to check which MenuItem was selected
+        switch(itemId) {
+            case R.id.AboutApp:
+                // TODO - Implement About Us functionality (new activity that lists stuff about us)
+                Toast.makeText(MainActivity.this, "TODO - redirect to an About Us " +
+                        "activity", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
