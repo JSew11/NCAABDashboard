@@ -51,7 +51,6 @@ public class NewsAPIFactory {
         String api_key = "01d0758178cb4734bdd33854b2eea5ca";
 
         String url = "https://newsapi.org/v2/everything?q=" + nameSearch + " college basketball" +
-                "&category=sports" +
                 "&apiKey=" + api_key;
 
         // 1st param => type of method (GET/PUT/POST/PATCH/etc)
@@ -64,7 +63,7 @@ public class NewsAPIFactory {
                     // SUCCESS
                     @Override
                     public void onResponse(String response) {
-                        Log.d("DEBUG",  "GOT RESPONSE FROM SITE");
+                        Toast.makeText(context, "Got response from newsapi", Toast.LENGTH_LONG).show();
 
                         // try/catch block for returned JSON data
                         // see API's documentation for returned format
