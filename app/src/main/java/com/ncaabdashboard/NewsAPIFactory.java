@@ -50,10 +50,9 @@ public class NewsAPIFactory {
         // TODO: add capability to load this info from api.properties file
         String api_key = "01d0758178cb4734bdd33854b2eea5ca";
 
-        String url = "https://newsapi.org/v2/top-headlines?api-key=" + api_key +
-                "&country=us" +
-                "&q=" + nameSearch + " college basketball" +
-                "&category=sports";
+        String url = "https://newsapi.org/v2/everything?q=" + nameSearch + " college basketball" +
+                "&category=sports" +
+                "&apiKey=" + api_key;
 
         // 1st param => type of method (GET/PUT/POST/PATCH/etc)
         // 2nd param => complete url of the API
@@ -66,7 +65,7 @@ public class NewsAPIFactory {
                     @Override
                     public void onResponse(String response) {
                         Log.d("DEBUG",  "GOT RESPONSE FROM SITE");
-                        
+
                         // try/catch block for returned JSON data
                         // see API's documentation for returned format
                         try {
@@ -86,7 +85,7 @@ public class NewsAPIFactory {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // display a simple message on the screen
-                        Toast.makeText(context, "Food source is not responding (USDA API)", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Newsapi is not responding", Toast.LENGTH_LONG).show();
                     }
                 });
     }
