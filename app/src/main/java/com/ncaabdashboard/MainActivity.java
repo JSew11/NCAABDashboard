@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
             /**
              * Method that updates the view of the RecyclerView with a given News Story
              */
-            public void updateView(/*TODO - add param of new story class*/) {
+            public void updateView(NewsStory newsStory) {
                 // TODO - Write updateView so it properly displays the news story card in the
                 //  RecyclerView
             }
