@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">NCAABDashboard</string>
+    <string name="home">Home Team</string>
+    <string name="home_team_logo">Home Team Logo</string>
+    <string name="colon">:</string>
+    <string name="away_team_logo">Away Team Logo</string>
+    <string name="away_team">Away Team</string>
+    <string name="men_s_women_s">Men\'s/Women\'s</string>
+    <string name="division_1">Division 1 </string>
+    <string name="placeholder_time">00:00 (AM/PM)</string>
+    <string name="where_to_watch">Where to Watch</string>
+    <string name="find_tickets">Find Tickets</string>
+    <string name="news_headline">News Headline</string>
+    <string name="source_url">Source: URL</string>
 </resources>
