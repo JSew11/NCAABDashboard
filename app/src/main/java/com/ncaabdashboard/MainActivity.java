@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 
 /**
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void loadNewsStory() {
         // call method to get latest news by university
-        StringRequest response = NewsAPIFactory.getLatestNewsByUniversity(this, "Gonzaga");
+        JsonObjectRequest response = NewsAPIFactory.getLatestNewsByUniversity(this, "Gonzaga");
     }
 
     /**
