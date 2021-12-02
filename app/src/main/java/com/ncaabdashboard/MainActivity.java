@@ -1,12 +1,5 @@
 package com.ncaabdashboard;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.Placeholder;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -19,28 +12,29 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-<<<<<<< HEAD
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
-=======
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
->>>>>>> main
+import java.util.Map;
 
 /**
  * MainActivity Class for the NCAABDashboard App
@@ -102,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
         CustomAdapter adapter = new CustomAdapter();
         recyclerView.setAdapter(adapter);
 
-<<<<<<< HEAD
         // demo loading a news story from an api
         loadNewsStory();
     }
@@ -162,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
             };
 
         queue.add(stringRequest);
-=======
         // set up gameView onClick method
         gameView = findViewById(R.id.GameCardView);
         gameView.setOnClickListener(new View.OnClickListener() {
@@ -198,7 +190,6 @@ public class MainActivity extends AppCompatActivity {
                 //  place to watch like a restaurant/bar)
             }
         });
->>>>>>> main
     }
 
     /**
