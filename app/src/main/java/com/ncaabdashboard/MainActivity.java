@@ -29,6 +29,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ import java.util.Map;
  * Placeholder Image - https://www.royalcontainers.com/100-years-of-knowledge-connections/placeholder/
  */
 public class MainActivity extends AppCompatActivity {
-    protected String TAG = "MainActivityTag";
+    protected String TAG = "DEBUG";
     protected int PLACEHOLDER_ID = R.drawable.placeholder;
     // static data source for demo
     List<NewsStory> stories;
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Button findTickets;
     private Button whereToWatch;
+    private CustomAdapter adapter;
 
     /**
      * onCreate method called when starting the app
@@ -68,11 +71,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // set up static NewsStory data source for demo
-        stories = new ArrayList<NewsStory>();
-        stories.add(new NewsStory("NCAA Basketball News", PLACEHOLDER_ID,
-                "Something happened in College basketball", "www.google.com"));
-        stories.add(new NewsStory("More NCAA Basketball News", PLACEHOLDER_ID,
-                "Something else happened in College basketball", "www.google.com"));
+//        stories = new ArrayList<NewsStory>();
+//        stories.add(new NewsStory("NCAA Basketball News", PLACEHOLDER_ID,
+//                "Something happened in College basketball", "www.google.com"));
+//        stories.add(new NewsStory("More NCAA Basketball News", PLACEHOLDER_ID,
+//                "Something else happened in College basketball", "www.google.com"));
+        loadNewsStory();
 
         // set up SearchBar
         searchBar = findViewById(R.id.SearchBar);
@@ -93,11 +97,8 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         // wire up CustomAdapter
-        CustomAdapter adapter = new CustomAdapter();
+        adapter = new CustomAdapter();
         recyclerView.setAdapter(adapter);
-
-        // demo loading a news story from an api
-        loadNewsStory();
 
         // set up gameView onClick method
         gameView = findViewById(R.id.GameCardView);
@@ -140,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
      * Private method to make an api call and create a new news story in our demo
      */
     private void loadNewsStory() {
+        stories = new ArrayList<NewsStory>();
+
         String api_key = "01d0758178cb4734bdd33854b2eea5ca";
 
         // call method to get latest news by university
@@ -162,6 +165,35 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "API SUCCESS", Toast.LENGTH_LONG).show();
 
                         // parse response
+                        try {
+                            JSONArray articles = response.getJSONArray("articles");
+                            Log.d(TAG, "article: " + articles);
+
+                            JSONObject firstArticle = articles.getJSONObject(0);
+                            Log.d(TAG, "first art: " + firstArticle);
+
+                            String title = firstArticle.getString("title");
+                            Log.d(TAG, "title: " + title);
+
+                            // TODO: get imageId from url of image
+                            // int imageId = firstArticle.get("urlToImage");
+
+                            String synopsis = firstArticle.getString("description");
+                            Log.d(TAG, "synopsis: " + synopsis);
+
+                            String url = firstArticle.getString("url");
+                            Log.d(TAG, "url: " + url);
+
+
+                            stories.add(new NewsStory(title, PLACEHOLDER_ID, synopsis, url));
+
+                            adapter.notifyItemChanged(1);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        finally {
+                            Log.d(TAG, "" + stories);
+                        }
 
                         // create a new StoryNews object
                     }
@@ -277,10 +309,11 @@ public class MainActivity extends AppCompatActivity {
          */
         @Override
         public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+
             NewsStory newsStory = stories.get(position); // get the NewsStory object at position
             holder.updateView(newsStory); // update the view with the info from 'newsStory'
             // TODO - Finish onBindViewHolder to bind data from database to RecyclerView using
-            //  CustomViewHolder.updateView()
+            // CustomViewHolder.updateView()
         }
 
         /**
