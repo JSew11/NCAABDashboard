@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
         // call method to get latest news by university
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://newsapi.org/v2/everything?" +
-                "q=Gonzaga basketball" +
+                "q=Gonzaga+basketball" +
                 "&sortBy=popularity" +
                 "&from=2021-11-23";
 
@@ -164,38 +164,31 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Toast.makeText(MainActivity.this, "API SUCCESS", Toast.LENGTH_LONG).show();
 
-                        // parse response
+                        // TODO: make this part utilize a database backend to update our news stories
                         try {
+                            // parse JSON response to find articles
                             JSONArray articles = response.getJSONArray("articles");
-                            Log.d(TAG, "article: " + articles);
 
-                            JSONObject firstArticle = articles.getJSONObject(0);
-                            Log.d(TAG, "first art: " + firstArticle);
+                            // currently only show the top 3 results
+                            for (int i = 0; i < 3; i++) {
+                                JSONObject firstArticle = articles.getJSONObject(i);
 
-                            String title = firstArticle.getString("title");
-                            Log.d(TAG, "title: " + title);
+                                String title = firstArticle.getString("title");
+                                // TODO: get imageId from url of image
+                                // int imageId = firstArticle.get("urlToImage");
+                                int imageId = PLACEHOLDER_ID;
+                                String synopsis = firstArticle.getString("description");
+                                String url = firstArticle.getString("url");
 
-                            // TODO: get imageId from url of image
-                            // int imageId = firstArticle.get("urlToImage");
-
-                            String synopsis = firstArticle.getString("description");
-                            Log.d(TAG, "synopsis: " + synopsis);
-
-                            String url = firstArticle.getString("url");
-                            Log.d(TAG, "url: " + url);
-
-
-                            stories.add(new NewsStory(title, PLACEHOLDER_ID, synopsis, url));
-
-                            adapter.notifyItemChanged(1);
+                                stories.add(new NewsStory(title, imageId, synopsis, url));
+                                adapter.notifyItemChanged(i+1);
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         finally {
                             Log.d(TAG, "" + stories);
                         }
-
-                        // create a new StoryNews object
                     }
                 }, new Response.ErrorListener() {
 
