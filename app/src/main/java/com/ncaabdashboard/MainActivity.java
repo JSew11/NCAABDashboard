@@ -13,6 +13,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * MainActivity Class for the NCAABDashboard App
@@ -46,6 +61,66 @@ public class MainActivity extends AppCompatActivity {
         // wire up CustomAdapter
         CustomAdapter adapter = new CustomAdapter();
         recyclerView.setAdapter(adapter);
+
+        // demo loading a news story from an api
+        loadNewsStory();
+    }
+
+    /**
+     * Private method to make an api call and create a new news story in our demo
+     */
+    private void loadNewsStory() {
+        String api_key = "01d0758178cb4734bdd33854b2eea5ca";
+
+        // call method to get latest news by university
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://newsapi.org/v2/everything?" +
+                "q=Gonzaga basketball" +
+                "&sortBy=popularity" +
+                "&from=2021-11-23";
+
+        //String url = "https://www.google.com";
+
+        JsonObjectRequest stringRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(MainActivity.this, "API SUCCESS", Toast.LENGTH_LONG).show();
+
+                        // parse response
+
+                        // create a new StoryNews object
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MainActivity.this, "API FAILED", Toast.LENGTH_LONG).show();
+
+                        Log.d("ERROR_API", error.toString());
+                        Log.d("ERROR_API", "" + error.networkResponse.statusCode);
+                        Log.d("ERROR_API", "" + error.networkResponse.headers);
+                    }
+                })
+        // Class JsonObjectRequest
+            // override methods of the new class
+            {
+                // set http headers
+
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> headers = new HashMap<>();
+                    headers.put("User-Agent", "Mozilla/5.0");
+                    headers.put("Authorization", api_key);
+                    return headers;
+                }
+            };
+
+        queue.add(stringRequest);
     }
 
     /**

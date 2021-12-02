@@ -1,5 +1,6 @@
 package com.ncaabdashboard;
 
+
 /**
  * Class for a News Story in the NCAABDashboard app
  * @author - Alan Poblette
@@ -13,6 +14,7 @@ public class NewsStory {
 
     /**
      * Explicit Value Constructor
+
      * @param title - headline of the NewsStory
      * @param imageId - imageId for the NewsStory
      * @param synopsis - synopsis of the NewsStory
