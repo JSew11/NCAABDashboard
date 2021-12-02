@@ -8,12 +8,28 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/SearchBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:hint="@string/search"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@id/GameCardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/GameCardView"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
         android:clickable="true"
@@ -21,7 +37,7 @@
         app:layout_constraintBottom_toTopOf="@+id/NewsStories"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/SearchBar"
         card_view:cardElevation="8dp"
         card_view:cardCornerRadius="4dp"
         android:foreground="?android:attr/selectableItemBackground"
