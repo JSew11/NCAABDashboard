@@ -252,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onCLick: ");
                 Toast.makeText(MainActivity.this, "TODO - redirect to News Story View",
                         Toast.LENGTH_SHORT).show();
-                // TODO - Finish onCLick method to redirect to the news story view using the API
+                // TODO - Finish onCLick method to redirect to the news story activity using the API
             }
         }
 
@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
             NewsStory newsStory = stories.get(position); // get the NewsStory object at position
             holder.updateView(newsStory); // update the view with the info from 'newsStory'
             // TODO - Finish onBindViewHolder to bind data from database to RecyclerView using
-            // CustomViewHolder.updateView()
+            //  CustomViewHolder.updateView()
         }
 
         /**
