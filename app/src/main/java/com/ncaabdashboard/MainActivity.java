@@ -56,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText searchBar;
     private View gameView;
     private RecyclerView recyclerView;
-    private Button findTickets;
-    private Button whereToWatch;
     private CustomAdapter adapter;
 
     /**
@@ -108,31 +106,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "TODO - have GameView redirect to " +
                         "another activity", Toast.LENGTH_SHORT).show();
                 // TODO - set up onClick method to redirect to an in-depth game view activity
-            }
-        });
-
-        // set up findTickets button
-        findTickets = findViewById(R.id.FindTickets);
-        findTickets.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "TODO - have FindTickets redirect " +
-                        "to a place to buy tickets", Toast.LENGTH_SHORT).show();
-                // TODO - set up onClick method to redirect to ticketmaster (an activity to set up
-                //  ticketmaster search?)
-            }
-        });
-
-        // set up whereToWatch button
-        whereToWatch = findViewById(R.id.WhereToWatch);
-        whereToWatch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "TODO - have WhereToWatch redirect " +
-                        "to a map activity", Toast.LENGTH_SHORT).show();
-                // TODO - set up onClick method to redirect to map activity through an alert dialog
-                //  (ask if they have tickets - if so then locate venue / if not then locate other
-                //  place to watch like a restaurant/bar)
             }
         });
     }
