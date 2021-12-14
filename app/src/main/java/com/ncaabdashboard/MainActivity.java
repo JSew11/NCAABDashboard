@@ -46,6 +46,8 @@ import java.util.Map;
  * @version - 1.0.0
  * Pennant Image - Icons made by Freepik (https://www.freepik.com) from https://www.flaticon.com/
  * Placeholder Image - https://www.royalcontainers.com/100-years-of-knowledge-connections/placeholder/
+ * Team Menu Icon - Icons made by alkhalifi design from www.flaticon.com
+ * Player Menu Icon - Icons made by Freepik from www.flaticon.com
  */
 public class MainActivity extends AppCompatActivity {
     protected String TAG = "DEBUG";

@@ -4,6 +4,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/FindTeams"
+        android:icon="@drawable/team"
+        android:title="@string/find_a_team"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/FindPlayers"
+        android:icon="@drawable/player"
+        android:title="@string/find_a_player"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/UserPrefs"
+        android:title="@string/preferences"
+        app:showAsAction="never"
+        />
+
+    <item
         android:id="@+id/AboutApp"
         android:title="@string/about_us"
         app:showAsAction="never"

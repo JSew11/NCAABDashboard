@@ -15,4 +15,7 @@
     <string name="news_story_synopsis">News Story Synopsis</string>
     <string name="about_us">About Us</string>
     <string name="search">Search</string>
+    <string name="find_a_team">Find a Team</string>
+    <string name="preferences">Preferences</string>
+    <string name="find_a_player">Find a Player</string>
 </resources>
