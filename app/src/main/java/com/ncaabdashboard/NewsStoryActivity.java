@@ -4,14 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class NewsStoryActivity extends AppCompatActivity {
     private NewsStory newsStory;
     // data to create the newsStory object
     private String title = "TITLE";
     private int imageId = R.drawable.placeholder;
-    private String synopsis = "UNKNOWN";
-    private String url = "WWW.SAMPLEURL.COM";
+    private String story = "UNKNOWN";
+    // GUI objects
+    private TextView newsStoryTitle;
+    private ImageView newsStoryImage;
+    private TextView newsStoryText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +28,20 @@ public class NewsStoryActivity extends AppCompatActivity {
         if(newsStoryIntent != null) {
             title = newsStoryIntent.getStringExtra("title");
             imageId = newsStoryIntent.getIntExtra("imageId", R.drawable.placeholder);
-            synopsis = newsStoryIntent.getStringExtra("synopsis");
-            url = newsStoryIntent.getStringExtra("url");
+            story = newsStoryIntent.getStringExtra("story");
         }
         // create a NewsStory object using the data given by the Intent
-        newsStory = new NewsStory(title, imageId, synopsis, url);
+        newsStory = new NewsStory(title, imageId, story);
 
+        // link up GUI objects
+        newsStoryTitle = findViewById(R.id.newsStoryTitle);
+        newsStoryTitle.setText(title);
 
+        newsStoryImage = findViewById(R.id.newsStoryImage);
+        newsStoryImage.setImageResource(imageId);
+
+        newsStoryText = findViewById(R.id.newsStoryText);
+        newsStoryText.setText(story);
 
         // include a back arrow in the NewsStoryActivity
         getSupportActionBar().setDisplayShowHomeEnabled(true);

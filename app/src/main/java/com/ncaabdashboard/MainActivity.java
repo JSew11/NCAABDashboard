@@ -1,6 +1,7 @@
 package com.ncaabdashboard;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -252,7 +253,16 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onCLick: ");
                 Toast.makeText(MainActivity.this, "TODO - redirect to News Story View",
                         Toast.LENGTH_SHORT).show();
-                // TODO - Finish onCLick method to redirect to the news story activity using the API
+                // TODO - Finish onCLick method to redirect to the news story activity using API
+                //  (currently uses data stored in the NewsStory class)
+                Intent newsStoryIntent = new Intent(MainActivity.this,
+                        NewsStoryActivity.class);
+                NewsStory newsStory = stories.get(getAdapterPosition());
+                newsStoryIntent.putExtra("title", newsStory.getTitle());
+                newsStoryIntent.putExtra("imageId", newsStory.getImageId());
+                newsStoryIntent.putExtra("story", newsStory.getStory());
+
+                // launch the Intent to start NewsStoryActivity
             }
         }
 
