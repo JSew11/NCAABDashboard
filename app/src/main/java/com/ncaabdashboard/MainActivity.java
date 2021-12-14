@@ -1,5 +1,6 @@
 package com.ncaabdashboard;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -48,6 +49,7 @@ import java.util.Map;
  * Placeholder Image - https://www.royalcontainers.com/100-years-of-knowledge-connections/placeholder/
  * Team Menu Icon - Icons made by alkhalifi design from www.flaticon.com
  * Player Menu Icon - Icons made by Freepik from www.flaticon.com
+ * Search Icon - Icons made by Catalin Fertu from www.flaticon.com
  */
 public class MainActivity extends AppCompatActivity {
     protected String TAG = "DEBUG";
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 Toast.makeText(MainActivity.this, "TODO - have the search bar make a " +
                         "Google search using the given input", Toast.LENGTH_SHORT).show();
-                // TODO - Have search bar connect with Google API and provide search results
+                // TODO - Have search bar connect with API and provide search results
                 //  (use this as the text watcher)
                 return false;
             }
@@ -248,9 +250,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onCLick: ");
-                Toast.makeText(MainActivity.this, "TODO - redirect to News Story URL",
+                Toast.makeText(MainActivity.this, "TODO - redirect to News Story View",
                         Toast.LENGTH_SHORT).show();
-                // TODO - Finish onCLick method to redirect to the news story using the URL
+                // TODO - Finish onCLick method to redirect to the news story view using the API
             }
         }
 
@@ -312,15 +314,37 @@ public class MainActivity extends AppCompatActivity {
      * @param item - the MenuItem object that was clicked on
      * @return - super.onOptionsItemSelected(item)
      */
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
         // switch on the itemId to check which MenuItem was selected
         switch(itemId) {
+            case R.id.SearchNews:
+                // TODO - Have search button connect with API and provide search results
+                Toast.makeText(MainActivity.this, "TODO - search for news stories",
+                        Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.FindTeams:
+                // TODO - Have Find Teams option redirect to Team Search activity
+                Toast.makeText(MainActivity.this, "TODO - redirect to Team Search " +
+                                "activity", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.FindPlayers:
+                // TODO - Have Find Players option redirect to Player Search activity
+                Toast.makeText(MainActivity.this, "TODO - redirect to Player Search " +
+                        "activity", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.UserPrefs:
+                // TODO - Have Preferences option redirect to User Preferences activity
+                Toast.makeText(MainActivity.this, "TODO - redirect to User " +
+                        "Preferences activity", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.AboutApp:
                 // TODO - Implement About Us functionality (new activity that lists stuff about us)
                 Toast.makeText(MainActivity.this, "TODO - redirect to an About Us " +
                         "activity", Toast.LENGTH_SHORT).show();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
