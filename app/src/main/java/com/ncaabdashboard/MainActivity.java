@@ -17,6 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -62,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
     private View gameView;
     private RecyclerView recyclerView;
     private CustomAdapter adapter;
+    // launcher to start other Activities
+    private ActivityResultLauncher<Intent> launcher;
 
     /**
      * onCreate method called when starting the app
@@ -113,6 +119,15 @@ public class MainActivity extends AppCompatActivity {
                 // TODO - set up onClick method to redirect to an in-depth game view activity
             }
         });
+        
+        // set up launcher to receive results (might not be needed but good to have in case)
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        Log.d(TAG, "onActivityResult: Returned to MainActivity");
+                    }
+                });
     }
 
     /**
@@ -251,8 +266,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onCLick: ");
-                Toast.makeText(MainActivity.this, "TODO - redirect to News Story View",
-                        Toast.LENGTH_SHORT).show();
                 // TODO - Finish onCLick method to redirect to the news story activity using API
                 //  (currently uses data stored in the NewsStory class)
                 Intent newsStoryIntent = new Intent(MainActivity.this,
@@ -260,9 +273,11 @@ public class MainActivity extends AppCompatActivity {
                 NewsStory newsStory = stories.get(getAdapterPosition());
                 newsStoryIntent.putExtra("title", newsStory.getTitle());
                 newsStoryIntent.putExtra("imageId", newsStory.getImageId());
-                newsStoryIntent.putExtra("story", newsStory.getStory());
+                // TODO - CHANGE THIS TO CONTAIN THE STORY (or use API from NewsStoryActivity)
+                newsStoryIntent.putExtra("story", newsStory.getSynopsis());
 
                 // launch the Intent to start NewsStoryActivity
+                launcher.launch(newsStoryIntent);
             }
         }
 
@@ -302,7 +317,6 @@ public class MainActivity extends AppCompatActivity {
          */
         @Override
         public int getItemCount() {
-            // TODO - Implement getItemCount with database
             return stories.size();
         }
     }

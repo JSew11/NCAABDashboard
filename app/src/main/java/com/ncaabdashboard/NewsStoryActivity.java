@@ -4,9 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * Activity to display news stories for the NCAABDashboard app
+ * @author - Joshua Seward
+ * @version - 1.0.0
+ * @since - 14 December 2021
+ */
 public class NewsStoryActivity extends AppCompatActivity {
     private NewsStory newsStory;
     // data to create the newsStory object
@@ -18,6 +25,10 @@ public class NewsStoryActivity extends AppCompatActivity {
     private ImageView newsStoryImage;
     private TextView newsStoryText;
 
+    /**
+     * onCreate method called when the NewsStoryActivity begins
+     * @param savedInstanceState - savedInstanceState (not used in this scope)
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,5 +57,15 @@ public class NewsStoryActivity extends AppCompatActivity {
         // include a back arrow in the NewsStoryActivity
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    /**
+     * Method to give functionality to back arrow (no other menu options should be in this Activity)
+     * @param item - MenuItem that was pressed
+     * @return - boolean value telling whether the MenuItem press was handled
+     */
+    public boolean onOptionsItemSelected(MenuItem item){
+        finish();
+        return true;
     }
 }
