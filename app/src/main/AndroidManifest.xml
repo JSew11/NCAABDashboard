@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NCAABDashboard">
         <activity
+            android:name=".FindPlayerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FindTeamActivity"
+            android:exported="false" />
+        <activity
             android:name=".NewsStoryActivity"
             android:exported="false" />
         <activity

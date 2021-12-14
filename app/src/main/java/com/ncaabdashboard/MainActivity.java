@@ -346,28 +346,28 @@ public class MainActivity extends AppCompatActivity {
         switch(itemId) {
             case R.id.SearchNews:
                 // TODO - Have search button connect with API and provide search results
-                Toast.makeText(MainActivity.this, "TODO - search for news stories",
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "The 'Search Button' option is " +
+                        "currently under development", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.FindTeams:
                 // TODO - Have Find Teams option redirect to Team Search activity
-                Toast.makeText(MainActivity.this, "TODO - redirect to Team Search " +
-                                "activity", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "The 'Find a Team' option is " +
+                                "currently under development", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.FindPlayers:
                 // TODO - Have Find Players option redirect to Player Search activity
-                Toast.makeText(MainActivity.this, "TODO - redirect to Player Search " +
-                        "activity", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "The 'Find a Player' option is " +
+                        "currently under development", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.UserPrefs:
                 // TODO - Have Preferences option redirect to User Preferences activity
-                Toast.makeText(MainActivity.this, "TODO - redirect to User " +
-                        "Preferences activity", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "The 'Preferences' option is " +
+                        "currently under development", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.AboutApp:
                 // TODO - Implement About Us functionality (new activity that lists stuff about us)
-                Toast.makeText(MainActivity.this, "TODO - redirect to an About Us " +
-                        "activity", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "The 'About Us' option is " +
+                        "currently under development", Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
