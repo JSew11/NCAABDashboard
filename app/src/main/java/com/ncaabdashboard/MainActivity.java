@@ -77,24 +77,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // set up static NewsStory data source for demo
-//        stories = new ArrayList<NewsStory>();
-//        stories.add(new NewsStory("NCAA Basketball News", PLACEHOLDER_ID,
-//                "Something happened in College basketball", "www.google.com"));
-//        stories.add(new NewsStory("More NCAA Basketball News", PLACEHOLDER_ID,
-//                "Something else happened in College basketball", "www.google.com"));
-        loadNewsStory();
-
         // set up SearchBar
         searchBar = findViewById(R.id.SearchBar);
         searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                Toast.makeText(MainActivity.this, "TODO - have the search bar make a " +
-                        "Google search using the given input", Toast.LENGTH_SHORT).show();
-                // TODO - Have search bar connect with API and provide search results
-                //  (use this as the text watcher)
-                return false;
+                String query = v.getText().toString();
+
+                loadNewsStory(query);
+                return true;
             }
         });
 
@@ -107,26 +98,28 @@ public class MainActivity extends AppCompatActivity {
         adapter = new CustomAdapter();
         recyclerView.setAdapter(adapter);
 
-        // set up gameView onClick method
+        // set up gameView
         gameView = findViewById(R.id.GameCardView);
+
+        stories = new ArrayList<>();
+
+        loadNewsStory("Gonzaga Basketball");
     }
 
     /**
      * Private method to make an api call and create a new news story in our demo
      */
-    private void loadNewsStory() {
-        stories = new ArrayList<NewsStory>();
-
+    private void loadNewsStory(String query) {
         String api_key = "01d0758178cb4734bdd33854b2eea5ca";
 
         // call method to get latest news by university
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://newsapi.org/v2/everything?" +
-                "q=Gonzaga+basketball" +
+                "q=" + query +
                 "&sortBy=popularity" +
                 "&from=2021-11-23";
+                //"&sources=bbc-sport,bleacher-report,espn,fox-sports,talksport";
 
-        //String url = "https://www.google.com";
 
         JsonObjectRequest stringRequest = new JsonObjectRequest(
                 Request.Method.GET,
@@ -136,9 +129,9 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast.makeText(MainActivity.this, "API SUCCESS", Toast.LENGTH_LONG).show();
+                        stories.clear();
+                        Toast.makeText(MainActivity.this, "Search Complete", Toast.LENGTH_SHORT).show();
 
-                        // TODO: make this part utilize a database backend to update our news stories
                         try {
                             // parse JSON response to find articles
                             JSONArray articles = response.getJSONArray("articles");
@@ -155,8 +148,9 @@ public class MainActivity extends AppCompatActivity {
                                 String url = firstArticle.getString("url");
 
                                 stories.add(new NewsStory(title, imageId, synopsis, url));
-                                adapter.notifyItemChanged(i+1);
                             }
+
+                            adapter.notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -285,6 +279,7 @@ public class MainActivity extends AppCompatActivity {
          */
         @Override
         public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+            holder.setIsRecyclable(false);
             NewsStory newsStory = stories.get(position); // get the NewsStory object at position
             holder.updateView(newsStory); // update the view with the info from 'newsStory'
         }
@@ -323,9 +318,11 @@ public class MainActivity extends AppCompatActivity {
         // switch on the itemId to check which MenuItem was selected
         switch(itemId) {
             case R.id.SearchNews:
-                // TODO - Have search button connect with API and provide search results
-                Toast.makeText(MainActivity.this, "The 'Search Button' option is " +
-                        "currently under development", Toast.LENGTH_SHORT).show();
+                searchBar = findViewById(R.id.SearchBar);
+                String query = searchBar.getText().toString();
+
+                loadNewsStory(query);
+
                 break;
             case R.id.FindTeams:
                 // redirect to FindTeamsActivity
