@@ -57,7 +57,7 @@ import java.util.Map;
  * Search Icon - Icons made by Catalin Fertu from www.flaticon.com
  */
 public class MainActivity extends AppCompatActivity {
-    protected String TAG = "DEBUG";
+    protected String TAG = "MainActivityTag";
     protected int PLACEHOLDER_ID = R.drawable.placeholder;
     // static data source for demo
     List<NewsStory> stories;
@@ -66,8 +66,6 @@ public class MainActivity extends AppCompatActivity {
     private View gameView;
     private RecyclerView recyclerView;
     private CustomAdapter adapter;
-    // launcher to start other Activities
-    private ActivityResultLauncher<Intent> launcher;
 
     /**
      * onCreate method called when starting the app
@@ -119,15 +117,6 @@ public class MainActivity extends AppCompatActivity {
                 // TODO - set up onClick method to redirect to an in-depth game view activity
             }
         });
-        
-        // set up launcher to receive results (might not be needed but good to have in case)
-        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        Log.d(TAG, "onActivityResult: Returned to MainActivity");
-                    }
-                });
     }
 
     /**
@@ -268,16 +257,16 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onCLick: ");
                 // TODO - Finish onCLick method to redirect to the news story activity using API
                 //  (currently uses data stored in the NewsStory class)
+                NewsStory newsStory = stories.get(getAdapterPosition());
                 Intent newsStoryIntent = new Intent(MainActivity.this,
                         NewsStoryActivity.class);
-                NewsStory newsStory = stories.get(getAdapterPosition());
                 newsStoryIntent.putExtra("title", newsStory.getTitle());
                 newsStoryIntent.putExtra("imageId", newsStory.getImageId());
                 // TODO - CHANGE THIS TO CONTAIN THE STORY (or use API from NewsStoryActivity)
                 newsStoryIntent.putExtra("story", newsStory.getSynopsis());
 
                 // launch the Intent to start NewsStoryActivity
-                launcher.launch(newsStoryIntent);
+                startActivity(newsStoryIntent);
             }
         }
 
@@ -304,11 +293,8 @@ public class MainActivity extends AppCompatActivity {
          */
         @Override
         public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-
             NewsStory newsStory = stories.get(position); // get the NewsStory object at position
             holder.updateView(newsStory); // update the view with the info from 'newsStory'
-            // TODO - Finish onBindViewHolder to bind data from database to RecyclerView using
-            //  CustomViewHolder.updateView()
         }
 
         /**
@@ -350,20 +336,21 @@ public class MainActivity extends AppCompatActivity {
                         "currently under development", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.FindTeams:
-                // TODO - Have Find Teams option redirect to Team Search activity
-                Toast.makeText(MainActivity.this, "The 'Find a Team' option is " +
-                                "currently under development", Toast.LENGTH_SHORT).show();
+                // redirect to FindTeamsActivity
+                Intent findTeamsIntent = new Intent(MainActivity.this,
+                        FindTeamActivity.class);
+                startActivity(findTeamsIntent);
                 break;
-            case R.id.FindPlayers:
-                // TODO - Have Find Players option redirect to Player Search activity
-                Toast.makeText(MainActivity.this, "The 'Find a Player' option is " +
-                        "currently under development", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.UserPrefs:
-                // TODO - Have Preferences option redirect to User Preferences activity
-                Toast.makeText(MainActivity.this, "The 'Preferences' option is " +
-                        "currently under development", Toast.LENGTH_SHORT).show();
-                break;
+//            case R.id.FindPlayers:
+//                // TODO - Have Find Players option redirect to Player Search activity
+//                Toast.makeText(MainActivity.this, "The 'Find a Player' option is " +
+//                        "currently under development", Toast.LENGTH_SHORT).show();
+//                break;
+//            case R.id.UserPrefs:
+//                // TODO - Have Preferences option redirect to User Preferences activity
+//                Toast.makeText(MainActivity.this, "The 'Preferences' option is " +
+//                        "currently under development", Toast.LENGTH_SHORT).show();
+//                break;
             case R.id.AboutApp:
                 // TODO - Implement About Us functionality (new activity that lists stuff about us)
                 Toast.makeText(MainActivity.this, "The 'About Us' option is " +

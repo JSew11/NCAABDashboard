@@ -17,6 +17,7 @@
         app:showAsAction="never"
         />
 
+    <!--
     <item
         android:id="@+id/FindPlayers"
         android:icon="@drawable/player"
@@ -29,6 +30,7 @@
         android:title="@string/preferences"
         app:showAsAction="never"
         />
+        -->
 
     <item
         android:id="@+id/AboutApp"
