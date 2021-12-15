@@ -116,10 +116,15 @@ public class FindTeamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onCLick: ");
-                // TODO - Finish onCLick method to redirect to the team details activity using API
-                //  (currently uses data stored in the Team class)
-                Toast.makeText(FindTeamActivity.this, "TODO - redirect to Team" +
-                        "DetailsActivity", Toast.LENGTH_SHORT).show();
+                // redirect to the team details activity using API and pass the necessary key
+                Intent teamDetailsIntent = new Intent(FindTeamActivity.this,
+                        TeamDetailsActivity.class);
+                // pass the selected Team's key to the TeamDetailsActivity
+                Team curTeam = teams.get(getAdapterPosition());
+                teamDetailsIntent.putExtra("key", curTeam.getKey());
+                teamDetailsIntent.putExtra("school", curTeam.getSchool());
+                teamDetailsIntent.putExtra("apRank", curTeam.getApRank());
+                startActivity(teamDetailsIntent);
             }
         }
 
@@ -133,7 +138,7 @@ public class FindTeamActivity extends AppCompatActivity {
         @NonNull
         @Override
         public FindTeamActivity.CustomAdapter.CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            // inflate the custom news_story_card_item layout
+            // inflate the custom team_card_item layout
             View view = LayoutInflater.from(FindTeamActivity.this)
                     .inflate(R.layout.team_card_item, parent, false);
             return new FindTeamActivity.CustomAdapter.CustomViewHolder(view);

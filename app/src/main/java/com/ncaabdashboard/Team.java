@@ -24,7 +24,6 @@ public class Team {
     }
 
     /**************************** Getter and Setter Methods ****************************/
-
     public String getKey() {
         return key;
     }
