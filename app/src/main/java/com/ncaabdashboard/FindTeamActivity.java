@@ -19,10 +19,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -55,7 +69,44 @@ public class FindTeamActivity extends AppCompatActivity {
         }
 
         // get SPI data in JSON form
-        dataAPI.fetchTeamsData();
+//         dataAPI.fetchTeamsData();
+
+        // gonna work with volley to see if it helps
+        //******************************************************
+        String url = "https://api.sportsdata.io/v3/cbb/scores/json/teams?key=4634b7a1dc9c4e468aaad9196c5b8083";
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        Log.d("API", "everything worked");
+
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+
+                            Log.d("API", "formatted data into JSON");
+                            Log.d("API", jsonArray.toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("API_ERROR", error.toString());
+                Log.d("API_ERROR", "Error code: " + error.networkResponse.statusCode);
+            }
+        });
+
+
+
+        queue.add(stringRequest);
+
+
+        //*********************************************************
 
         // initialize the List to hold Team objects
         teams = new ArrayList<>();
@@ -73,6 +124,8 @@ public class FindTeamActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+
 
     /**
      * Class for a CustomAdapter for the NCAABDashboard App

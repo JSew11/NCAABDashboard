@@ -120,6 +120,9 @@ public class SportsDataAPI {
             try {
                 URL urlObject = new URL(url);
                 HttpsURLConnection urlConnection = (HttpsURLConnection) urlObject.openConnection();
+
+                Log.d(TAG, "Response code: " + urlConnection.getResponseCode());
+
                 // download JSON response
                 String jsonResults = "";
                 InputStream inputStream = urlConnection.getInputStream();
