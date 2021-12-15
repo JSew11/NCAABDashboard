@@ -140,7 +140,6 @@ public class SportsDataAPI {
                 for (int i = 0; i < teamsJArray.length(); ++i) {
                     Log.d(TAG, "JSON Object: " + teamsJArray.get(i));
                     JSONObject team = (JSONObject) teamsJArray.get(i);
-                    teams.add(i, teamsJArray.get(i));
                     Log.d(TAG, "Team: " + team.getString("Key"));
                     // TODO: need to parse through the JSON objects and convert to field values of related Class.
                 }
