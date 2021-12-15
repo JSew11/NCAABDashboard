@@ -141,13 +141,13 @@ public class MainActivity extends AppCompatActivity {
                                 JSONObject firstArticle = articles.getJSONObject(i);
 
                                 String title = firstArticle.getString("title");
-                                // TODO: get imageId from url of image
-                                // int imageId = firstArticle.get("urlToImage");
+                                String imageUrl = firstArticle.getString("urlToImage");
                                 int imageId = PLACEHOLDER_ID;
                                 String synopsis = firstArticle.getString("description");
                                 String url = firstArticle.getString("url");
+                                String story = firstArticle.getString("content");
 
-                                stories.add(new NewsStory(title, imageId, synopsis, url));
+                                stories.add(new NewsStory(title, imageId, synopsis, url, imageUrl, story));
                             }
 
                             adapter.notifyDataSetChanged();
@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
              */
             public void updateView(NewsStory newsStory) {
                 newsHeadline.setText(newsStory.getTitle());
-                newsImage.setImageResource(newsStory.getImageId());
+                new DownloadImageTask(newsImage).execute(newsStory.getImageUrl());
                 newsSynopsis.setText(newsStory.getSynopsis());
                 newsSource.setText(newsStory.getUrlLink());
             }
@@ -248,8 +248,8 @@ public class MainActivity extends AppCompatActivity {
                         NewsStoryActivity.class);
                 newsStoryIntent.putExtra("title", newsStory.getTitle());
                 newsStoryIntent.putExtra("imageId", newsStory.getImageId());
-                // TODO - CHANGE THIS TO CONTAIN THE STORY (or use API from NewsStoryActivity)
-                newsStoryIntent.putExtra("story", newsStory.getSynopsis());
+                newsStoryIntent.putExtra("story", newsStory.getStory());
+                newsStoryIntent.putExtra("imageUrl", newsStory.getImageUrl());
 
                 // launch the Intent to start NewsStoryActivity
                 startActivity(newsStoryIntent);

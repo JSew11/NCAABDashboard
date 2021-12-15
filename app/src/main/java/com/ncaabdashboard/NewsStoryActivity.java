@@ -20,10 +20,12 @@ public class NewsStoryActivity extends AppCompatActivity {
     private String title = "TITLE";
     private int imageId = R.drawable.placeholder;
     private String story = "UNKNOWN";
+    private String imageUrl = "NONE";
     // GUI objects
     private TextView newsStoryTitle;
     private ImageView newsStoryImage;
     private TextView newsStoryText;
+
 
     /**
      * onCreate method called when the NewsStoryActivity begins
@@ -40,6 +42,7 @@ public class NewsStoryActivity extends AppCompatActivity {
             title = newsStoryIntent.getStringExtra("title");
             imageId = newsStoryIntent.getIntExtra("imageId", R.drawable.placeholder);
             story = newsStoryIntent.getStringExtra("story");
+            imageUrl = newsStoryIntent.getStringExtra("imageUrl");
         }
         // create a NewsStory object using the data given by the Intent
         newsStory = new NewsStory(title, imageId, story);
@@ -49,7 +52,7 @@ public class NewsStoryActivity extends AppCompatActivity {
         newsStoryTitle.setText(title);
 
         newsStoryImage = findViewById(R.id.newsStoryImage);
-        newsStoryImage.setImageResource(imageId);
+        new DownloadImageTask(newsStoryImage).execute(imageUrl);
 
         newsStoryText = findViewById(R.id.newsStoryText);
         newsStoryText.setText(story);
