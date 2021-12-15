@@ -3,8 +3,19 @@ package com.ncaabdashboard;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.channels.AsynchronousChannelGroup;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Purpose: This class handles all API interactions through the Sports Data IO service.
@@ -55,7 +66,8 @@ public class SportsDataAPI {
     public void fetchTeamsData() {
         String url = constructFetchTeamsDataURL();
         Log.d(TAG, "Fetching Teams data URL: " + url);
-
+        TeamsDataParser dataParser = new TeamsDataParser();
+        dataParser.execute(url);
     }
 
     /**
@@ -86,18 +98,67 @@ public class SportsDataAPI {
         return BASE_URL + "/v3/cbb/scores/json/TeamSchedule/2021/" + teamName + "?key=" + API_KEY;
     }
 
+    /**
+     * Purpose: Opens a URL request to the API using the created URL String from fetchTeamsData().
+     *          The JSON response is then downloaded and stored into a list of Strings of type
+     *          Team.
+     */
+    class TeamsDataParser extends AsyncTask<String, void, List<Team>> {
 
-    class TeamFetcher extends AsyncTask<String, void, List<Team>> {
-
+        /**
+         * Purpose: Performs every step of the API query in the background on a separate thread.
+         *          Multi threaded operations are natively handled by android and semaphores and
+         *          Mutexes are not needed here.
+         * @param strings
+         * @return
+         */
         @Override
         protected List<Team> doInBackground(String... strings) {
+            String url = strings[0];
+            List<Team> teams = new ArrayList<>();
+            try {
+                URL urlObject = new URL(url);
+                HttpsURLConnection urlConnection = (HttpsURLConnection) urlObject.openConnection();
+                // download JSON response
+                String jsonResults = "";
+                InputStream inputStream = urlConnection.getInputStream();
+                InputStreamReader reader = new InputStreamReader(inputStream);
+                int data = reader.read();
+                while (data != -1) { // read entire JSON response.
+                    jsonResults += (char) data;
+                    data = reader.read();
+                }
+                Log.d(TAG, "Background Teams data Parse results: " + jsonResults);
+
+                // Parse JSON data
+                JSONObject jsonObject = new JSONObject(jsonResults);
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             return null;
         }
     }
 
+    /**
+     * Purpose: Opens a URL request to the API using the created URL String from fetchScheduleByTeam().
+     *          The JSON response is then downloaded and stored into a list of Strings of type
+     *          TeamSchedule.
+     */
+    class ScheduleParser extends AsyncTask<String, void, List<TeamSchedule>> {
 
-    class ScheduleFetcher extends AsyncTask<String, void, List<TeamSchedule>> {
-
+        /**
+         * Purpose: Performs every step of the API query in the background on a separate thread.
+         *          Multi threaded operations are natively handled by android and semaphores and
+         *          Mutexes are not needed here.
+         * @param strings
+         * @return
+         */
         @Override
         protected List<TeamSchedule> doInBackground(String... strings) {
             return null;
