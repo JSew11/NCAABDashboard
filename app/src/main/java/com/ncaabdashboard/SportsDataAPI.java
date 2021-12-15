@@ -109,8 +109,8 @@ public class SportsDataAPI {
          * Purpose: Performs every step of the API query in the background on a separate thread.
          *          Multi threaded operations are natively handled by android and semaphores and
          *          Mutexes are not needed here.
-         * @param strings
-         * @return
+         * @param strings Array of Strings that will only be filled with a single String for the URL.
+         * @return JSON objects full of all of the data queried from the API.
          */
         @Override
         protected List<Team> doInBackground(String... strings) {
@@ -156,11 +156,12 @@ public class SportsDataAPI {
          * Purpose: Performs every step of the API query in the background on a separate thread.
          *          Multi threaded operations are natively handled by android and semaphores and
          *          Mutexes are not needed here.
-         * @param strings
-         * @return
+         * @param strings Array of Strings that will only be filled with a single String for the URL.
+         * @return JSON objects full of all of the data queried from the API.
          */
         @Override
         protected List<TeamSchedule> doInBackground(String... strings) {
+            //TODO: get this to parse JSON data.
             return null;
         }
     }
