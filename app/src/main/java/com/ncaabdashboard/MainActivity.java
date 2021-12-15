@@ -1,5 +1,7 @@
 package com.ncaabdashboard;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -15,6 +17,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -48,6 +54,7 @@ import java.util.Map;
  * Placeholder Image - https://www.royalcontainers.com/100-years-of-knowledge-connections/placeholder/
  * Team Menu Icon - Icons made by alkhalifi design from www.flaticon.com
  * Player Menu Icon - Icons made by Freepik from www.flaticon.com
+ * Search Icon - Icons made by Catalin Fertu from www.flaticon.com
  */
 public class MainActivity extends AppCompatActivity {
     protected String TAG = "DEBUG";
@@ -59,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
     private View gameView;
     private RecyclerView recyclerView;
     private CustomAdapter adapter;
+    // launcher to start other Activities
+    private ActivityResultLauncher<Intent> launcher;
 
     /**
      * onCreate method called when starting the app
@@ -85,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 Toast.makeText(MainActivity.this, "TODO - have the search bar make a " +
                         "Google search using the given input", Toast.LENGTH_SHORT).show();
-                // TODO - Have search bar connect with Google API and provide search results
+                // TODO - Have search bar connect with API and provide search results
                 //  (use this as the text watcher)
                 return false;
             }
@@ -110,6 +119,15 @@ public class MainActivity extends AppCompatActivity {
                 // TODO - set up onClick method to redirect to an in-depth game view activity
             }
         });
+        
+        // set up launcher to receive results (might not be needed but good to have in case)
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        Log.d(TAG, "onActivityResult: Returned to MainActivity");
+                    }
+                });
     }
 
     /**
@@ -248,9 +266,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onCLick: ");
-                Toast.makeText(MainActivity.this, "TODO - redirect to News Story URL",
-                        Toast.LENGTH_SHORT).show();
-                // TODO - Finish onCLick method to redirect to the news story using the URL
+                // TODO - Finish onCLick method to redirect to the news story activity using API
+                //  (currently uses data stored in the NewsStory class)
+                Intent newsStoryIntent = new Intent(MainActivity.this,
+                        NewsStoryActivity.class);
+                NewsStory newsStory = stories.get(getAdapterPosition());
+                newsStoryIntent.putExtra("title", newsStory.getTitle());
+                newsStoryIntent.putExtra("imageId", newsStory.getImageId());
+                // TODO - CHANGE THIS TO CONTAIN THE STORY (or use API from NewsStoryActivity)
+                newsStoryIntent.putExtra("story", newsStory.getSynopsis());
+
+                // launch the Intent to start NewsStoryActivity
+                launcher.launch(newsStoryIntent);
             }
         }
 
@@ -281,7 +308,7 @@ public class MainActivity extends AppCompatActivity {
             NewsStory newsStory = stories.get(position); // get the NewsStory object at position
             holder.updateView(newsStory); // update the view with the info from 'newsStory'
             // TODO - Finish onBindViewHolder to bind data from database to RecyclerView using
-            // CustomViewHolder.updateView()
+            //  CustomViewHolder.updateView()
         }
 
         /**
@@ -290,7 +317,6 @@ public class MainActivity extends AppCompatActivity {
          */
         @Override
         public int getItemCount() {
-            // TODO - Implement getItemCount with database
             return stories.size();
         }
     }
@@ -312,15 +338,37 @@ public class MainActivity extends AppCompatActivity {
      * @param item - the MenuItem object that was clicked on
      * @return - super.onOptionsItemSelected(item)
      */
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int itemId = item.getItemId();
         // switch on the itemId to check which MenuItem was selected
         switch(itemId) {
+            case R.id.SearchNews:
+                // TODO - Have search button connect with API and provide search results
+                Toast.makeText(MainActivity.this, "The 'Search Button' option is " +
+                        "currently under development", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.FindTeams:
+                // TODO - Have Find Teams option redirect to Team Search activity
+                Toast.makeText(MainActivity.this, "The 'Find a Team' option is " +
+                                "currently under development", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.FindPlayers:
+                // TODO - Have Find Players option redirect to Player Search activity
+                Toast.makeText(MainActivity.this, "The 'Find a Player' option is " +
+                        "currently under development", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.UserPrefs:
+                // TODO - Have Preferences option redirect to User Preferences activity
+                Toast.makeText(MainActivity.this, "The 'Preferences' option is " +
+                        "currently under development", Toast.LENGTH_SHORT).show();
+                break;
             case R.id.AboutApp:
                 // TODO - Implement About Us functionality (new activity that lists stuff about us)
-                Toast.makeText(MainActivity.this, "TODO - redirect to an About Us " +
-                        "activity", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "The 'About Us' option is " +
+                        "currently under development", Toast.LENGTH_SHORT).show();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

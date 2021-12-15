@@ -18,4 +18,6 @@
     <string name="find_a_team">Find a Team</string>
     <string name="preferences">Preferences</string>
     <string name="find_a_player">Find a Player</string>
+    <string name="search_news_stories">Search News Stories</string>
+    <string name="title">Title</string>
 </resources>

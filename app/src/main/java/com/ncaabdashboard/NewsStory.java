@@ -10,6 +10,7 @@ public class NewsStory {
     private String title;
     private int imageId;
     private String synopsis;
+    private String story;
     private String urlLink;
 
     /**
@@ -25,6 +26,19 @@ public class NewsStory {
         setImageId(imageId);
         setSynopsis(synopsis);
         setUrlLink(url);
+    }
+
+    /**
+     * Explicit Value Constructor
+
+     * @param title - headline of the NewsStory
+     * @param imageId - imageId for the NewsStory
+     * @param story - synopsis of the NewsStory
+     */
+    public NewsStory(String title, int imageId, String story) {
+        setTitle(title);
+        setImageId(imageId);
+        setStory(story);
     }
 
     /***********************************************************************************/
@@ -51,6 +65,14 @@ public class NewsStory {
 
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
+    }
+
+    public String getStory() {
+        return story;
+    }
+
+    public void setStory(String story) {
+        this.story = story;
     }
 
     public String getUrlLink() {
