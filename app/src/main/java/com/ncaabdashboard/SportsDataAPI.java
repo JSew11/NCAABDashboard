@@ -44,21 +44,39 @@ public class SportsDataAPI {
     }
 
     /**
-     * Purpose: fetches the entire list of teams data from the API by construction the required URL
+     * Purpose: Fetches the entire list of teams data from the API by construction the required URL
      *          with API key.
      */
     public void fetchTeamsData() {
-        // url for request
         String url = constructFetchTeamsDataURL();
         Log.d(TAG, "Fetching Teams data URL: " + url);
     }
 
     /**
-     * Purpose: builds the necessary string to fetch the teams data from the API.
+     * Purpose: Builds the necessary string to fetch the teams data from the API.
      * @return String fetch URL with API key.
      */
     private String constructFetchTeamsDataURL() {
         return BASE_URL + "/v3/cbb/scores/json/teams" + "?key=" + API_KEY;
+    }
+
+    /**
+     * Purpose: Fetches the list of scheduled games for a specific team. The team name must be the
+     *          key field from the Team class in a 3-4 char string.
+     * @param teamName String of the specific team key code such as GNZG for Gonzaga University.
+     */
+    public void fetchScheduleByTeam(String teamName) {
+        String url = constructFetchScheduleByTeamsURL(teamName);
+        Log.d(TAG, "Fetching Schedule by Team name: " + url);
+    }
+
+    /**
+     * Purpose: Builds the necessary string to fetch the Game Schedule data from the API.
+     * @param teamName String of the specific team key code such as GNZG for Gonzaga University.
+     * @return Completed fetch URL with team name and API key.
+     */
+    private String constructFetchScheduleByTeamsURL(String teamName) {
+        return BASE_URL + "/v3/cbb/scores/json/TeamSchedule/2021/" + teamName + "?key=" + API_KEY;
     }
 
 }

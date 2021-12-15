@@ -54,6 +54,9 @@ public class FindTeamActivity extends AppCompatActivity {
             Log.d(TAG, "onCreate: Intent Received ");
         }
 
+        // get SPI data in JSON form
+        dataAPI.fetchTeamsData();
+
         // initialize the List to hold Team objects
         teams = new ArrayList<>();
         // add fake data to see if cards work
