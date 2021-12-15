@@ -23,6 +23,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Activity to select a Team to view more details on
@@ -33,6 +34,7 @@ import java.util.List;
 public class FindTeamActivity extends AppCompatActivity {
     protected final String TAG = "FindTeamActivityTag";
     private List<Team> teams;
+    private SportsDataAPI dataAPI = new SportsDataAPI(this);
     // GUI objects
     private RecyclerView teamOptions;
 
@@ -65,7 +67,7 @@ public class FindTeamActivity extends AppCompatActivity {
         teamOptions.setAdapter(adapter);
 
         // include a back arrow in the FindTeamActivity
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

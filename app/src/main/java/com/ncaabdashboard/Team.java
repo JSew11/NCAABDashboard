@@ -16,7 +16,7 @@ public class Team {
      * DVC for a Team object (used to gather data from SportsDataIO's 'Teams' API)
      * Purpose: Default constructor that presets the data for a team ro misc filler data.
      *          This method might be called for a filler until actual data is found from
-     *          an online scraper via the search API.
+     *          an online scraper via the API.
      */
     public Team() {
         key = "N/A";
