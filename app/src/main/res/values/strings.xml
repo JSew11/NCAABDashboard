@@ -5,7 +5,7 @@
     <string name="colon">:</string>
     <string name="away_team_logo">Away Team Logo</string>
     <string name="away_team">Away Team</string>
-    <string name="men_s_women_s">Men\'s/Women\'s</string>
+    <string name="men_s_women_s">Men\'s</string>
     <string name="division_1">Division 1 </string>
     <string name="placeholder_time">00:00 (AM/PM)</string>
     <string name="where_to_watch">Where to Watch</string>
@@ -14,7 +14,7 @@
     <string name="source_url">Source: URL</string>
     <string name="news_story_synopsis">News Story Synopsis</string>
     <string name="about_us">About Us</string>
-    <string name="search">Search</string>
+    <string name="search">Search College Basketball News</string>
     <string name="find_a_team">Find a Team</string>
     <string name="preferences">Preferences</string>
     <string name="find_a_player">Find a Player</string>

@@ -98,16 +98,8 @@ public class MainActivity extends AppCompatActivity {
         adapter = new CustomAdapter();
         recyclerView.setAdapter(adapter);
 
-        // set up gameView onClick method
+        // set up gameView
         gameView = findViewById(R.id.GameCardView);
-        gameView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "TODO - have GameView redirect to " +
-                        "another activity", Toast.LENGTH_SHORT).show();
-                // TODO - set up onClick method to redirect to an in-depth game view activity
-            }
-        });
 
         stories = new ArrayList<>();
 
