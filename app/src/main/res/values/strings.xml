@@ -27,4 +27,5 @@
     <string name="sample_number">#N</string>
     <string name="sample_player_name">First Last</string>
     <string name="roster">Roster</string>
+    <string name="see_rest_of_story">See Rest of Story</string>
 </resources>

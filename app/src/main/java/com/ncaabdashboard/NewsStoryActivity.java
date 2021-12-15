@@ -3,8 +3,11 @@ package com.ncaabdashboard;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,10 +24,12 @@ public class NewsStoryActivity extends AppCompatActivity {
     private int imageId = R.drawable.placeholder;
     private String story = "UNKNOWN";
     private String imageUrl = "NONE";
+    private String urlLink = "";
     // GUI objects
     private TextView newsStoryTitle;
     private ImageView newsStoryImage;
     private TextView newsStoryText;
+    private Button seeNewsStory;
 
 
     /**
@@ -43,6 +48,7 @@ public class NewsStoryActivity extends AppCompatActivity {
             imageId = newsStoryIntent.getIntExtra("imageId", R.drawable.placeholder);
             story = newsStoryIntent.getStringExtra("story");
             imageUrl = newsStoryIntent.getStringExtra("imageUrl");
+            urlLink = newsStoryIntent.getStringExtra("urlLink");
         }
         // create a NewsStory object using the data given by the Intent
         newsStory = new NewsStory(title, imageId, story);
@@ -56,6 +62,17 @@ public class NewsStoryActivity extends AppCompatActivity {
 
         newsStoryText = findViewById(R.id.newsStoryText);
         newsStoryText.setText(story);
+
+        seeNewsStory = findViewById(R.id.seeStoryButton);
+        seeNewsStory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlLink));
+                startActivity(browserIntent);
+            }
+        });
+
+
 
         // include a back arrow in the NewsStoryActivity
         getSupportActionBar().setDisplayShowHomeEnabled(true);

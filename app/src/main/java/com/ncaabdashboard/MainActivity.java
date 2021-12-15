@@ -250,6 +250,7 @@ public class MainActivity extends AppCompatActivity {
                 newsStoryIntent.putExtra("imageId", newsStory.getImageId());
                 newsStoryIntent.putExtra("story", newsStory.getStory());
                 newsStoryIntent.putExtra("imageUrl", newsStory.getImageUrl());
+                newsStoryIntent.putExtra("urlLink", newsStory.getUrlLink());
 
                 // launch the Intent to start NewsStoryActivity
                 startActivity(newsStoryIntent);
