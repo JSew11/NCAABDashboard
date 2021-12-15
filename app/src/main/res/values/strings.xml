@@ -23,4 +23,8 @@
     <string name="school">School</string>
     <string name="ap">AP</string>
     <string name="ap_top_25_teams">AP Top 25 Teams</string>
+    <string name="sample_rank_and_school">#0 School</string>
+    <string name="sample_number">#N</string>
+    <string name="sample_player_name">First Last</string>
+    <string name="roster">Roster</string>
 </resources>
