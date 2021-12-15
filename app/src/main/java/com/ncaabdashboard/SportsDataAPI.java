@@ -1,10 +1,15 @@
 package com.ncaabdashboard;
 
+import android.os.AsyncTask;
 import android.util.Log;
+
+import java.nio.channels.AsynchronousChannelGroup;
+import java.util.List;
 
 /**
  * Purpose: This class handles all API interactions through the Sports Data IO service.
  * @author - Dustin Cassell
+ * @version 1.0.1
  * @since - 14 December 2021
  */
 public class SportsDataAPI {
@@ -50,6 +55,7 @@ public class SportsDataAPI {
     public void fetchTeamsData() {
         String url = constructFetchTeamsDataURL();
         Log.d(TAG, "Fetching Teams data URL: " + url);
+
     }
 
     /**
@@ -63,20 +69,40 @@ public class SportsDataAPI {
     /**
      * Purpose: Fetches the list of scheduled games for a specific team. The team name must be the
      *          key field from the Team class in a 3-4 char string.
-     * @param teamName String of the specific team key code such as GNZG for Gonzaga University.
+     * @param teamName String of the specific team key code such as 'GNZG' for Gonzaga University.
      */
     public void fetchScheduleByTeam(String teamName) {
         String url = constructFetchScheduleByTeamsURL(teamName);
         Log.d(TAG, "Fetching Schedule by Team name: " + url);
+
     }
 
     /**
      * Purpose: Builds the necessary string to fetch the Game Schedule data from the API.
-     * @param teamName String of the specific team key code such as GNZG for Gonzaga University.
+     * @param teamName String of the specific team key code such as 'GNZG' for Gonzaga University.
      * @return Completed fetch URL with team name and API key.
      */
     private String constructFetchScheduleByTeamsURL(String teamName) {
         return BASE_URL + "/v3/cbb/scores/json/TeamSchedule/2021/" + teamName + "?key=" + API_KEY;
     }
+
+
+    class TeamFetcher extends AsyncTask<String, void, List<Team>> {
+
+        @Override
+        protected List<Team> doInBackground(String... strings) {
+            return null;
+        }
+    }
+
+
+    class ScheduleFetcher extends AsyncTask<String, void, List<TeamSchedule>> {
+
+        @Override
+        protected List<TeamSchedule> doInBackground(String... strings) {
+            return null;
+        }
+    }
+
 
 }

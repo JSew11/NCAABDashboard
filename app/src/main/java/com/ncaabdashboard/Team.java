@@ -36,7 +36,7 @@ public class Team {
         this.school = school;
     }
 
-    /**************************** Getter and Setter Methods ****************************/
+    /* *************************** Getter and Setter Methods *************************** */
     /**
      * Purpose: Generic getter for the key field.
      * @return String of 2-4 letters to mark the name of the team for the API such as
@@ -86,5 +86,5 @@ public class Team {
     public void setSchool(String school) {
         this.school = school;
     }
-    /***********************************************************************************/
+    /* ********************************************************************************* */
 }
