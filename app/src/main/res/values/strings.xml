@@ -20,4 +20,7 @@
     <string name="find_a_player">Find a Player</string>
     <string name="search_news_stories">Search News Stories</string>
     <string name="title">Title</string>
+    <string name="school">School</string>
+    <string name="ap">AP</string>
+    <string name="ap_top_25_teams">AP Top 25 Teams</string>
 </resources>
