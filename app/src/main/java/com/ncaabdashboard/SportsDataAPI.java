@@ -2,6 +2,7 @@ package com.ncaabdashboard;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ProgressBar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -103,7 +104,7 @@ public class SportsDataAPI {
      *          The JSON response is then downloaded and stored into a list of Strings of type
      *          Team.
      */
-    class TeamsDataParser extends AsyncTask<String, void, List<Team>> {
+    class TeamsDataParser extends AsyncTask<String, ProgressBar, List<Team>> {
 
         /**
          * Purpose: Performs every step of the API query in the background on a separate thread.
@@ -128,7 +129,7 @@ public class SportsDataAPI {
                     jsonResults += (char) data;
                     data = reader.read();
                 }
-                Log.d(TAG, "Background Teams data Parse results: " + jsonResults);
+                Log.d(TAG, "Background Teams data JSON results: " + jsonResults);
 
                 // Parse JSON data
                 JSONObject jsonObject = new JSONObject(jsonResults);
@@ -150,7 +151,7 @@ public class SportsDataAPI {
      *          The JSON response is then downloaded and stored into a list of Strings of type
      *          TeamSchedule.
      */
-    class ScheduleParser extends AsyncTask<String, void, List<TeamSchedule>> {
+    class ScheduleParser extends AsyncTask<String, ProgressBar, List<TeamSchedule>> {
 
         /**
          * Purpose: Performs every step of the API query in the background on a separate thread.
@@ -161,7 +162,33 @@ public class SportsDataAPI {
          */
         @Override
         protected List<TeamSchedule> doInBackground(String... strings) {
-            //TODO: get this to parse JSON data.
+            String url = strings[0];
+            List<TeamSchedule> teams = new ArrayList<>();
+            try {
+                URL urlObject = new URL(url);
+                HttpsURLConnection urlConnection = (HttpsURLConnection) urlObject.openConnection();
+                // download JSON response
+                String jsonResults = "";
+                InputStream inputStream = urlConnection.getInputStream();
+                InputStreamReader reader = new InputStreamReader(inputStream);
+                int data = reader.read();
+                while (data != -1) { // read entire JSON response.
+                    jsonResults += (char) data;
+                    data = reader.read();
+                }
+                Log.d(TAG, "Background Team Schedules JSON results: " + jsonResults);
+
+                // Parse JSON data //TODO: get this to parse JSON data.
+                JSONObject jsonObject = new JSONObject(jsonResults);
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             return null;
         }
     }
