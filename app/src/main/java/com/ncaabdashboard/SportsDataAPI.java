@@ -4,9 +4,11 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ProgressBar;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -120,22 +122,20 @@ public class SportsDataAPI {
             try {
                 URL urlObject = new URL(url);
                 HttpsURLConnection urlConnection = (HttpsURLConnection) urlObject.openConnection();
-
                 Log.d(TAG, "Response code: " + urlConnection.getResponseCode());
 
                 // download JSON response
                 String jsonResults = "";
-                InputStream inputStream = urlConnection.getInputStream();
-                InputStreamReader reader = new InputStreamReader(inputStream);
-                int data = reader.read();
-                while (data != -1) { // read entire JSON response.
-                    jsonResults += (char) data;
-                    data = reader.read();
+                BufferedReader input = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+                String inputLine;
+                while ((inputLine = input.readLine()) != null) { // read entire JSON response.
+                    jsonResults += inputLine;
                 }
                 Log.d(TAG, "Background Teams data JSON results: " + jsonResults);
 
                 // Parse JSON data
-                JSONObject jsonObject = new JSONObject(jsonResults);
+                JSONArray jsonObject = new JSONArray(jsonResults);
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();

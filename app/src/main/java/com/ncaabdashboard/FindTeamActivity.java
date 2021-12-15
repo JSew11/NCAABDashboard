@@ -69,41 +69,41 @@ public class FindTeamActivity extends AppCompatActivity {
         }
 
         // get SPI data in JSON form
-//         dataAPI.fetchTeamsData();
+         dataAPI.fetchTeamsData();
 
         // gonna work with volley to see if it helps
         //******************************************************
-        String url = "https://api.sportsdata.io/v3/cbb/scores/json/teams?key=4634b7a1dc9c4e468aaad9196c5b8083";
+//        String url = "https://api.sportsdata.io/v3/cbb/scores/json/teams?key=4634b7a1dc9c4e468aaad9196c5b8083";
+//
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//
+//        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        // Display the first 500 characters of the response string.
+//                        Log.d("API", "everything worked");
+//
+//                        try {
+//                            JSONArray jsonArray = new JSONArray(response);
+//
+//                            Log.d("API", "formatted data into JSON");
+//                            Log.d("API", jsonArray.toString());
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.d("API_ERROR", error.toString());
+//                Log.d("API_ERROR", "Error code: " + error.networkResponse.statusCode);
+//            }
+//        });
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        Log.d("API", "everything worked");
-
-                        try {
-                            JSONArray jsonArray = new JSONArray(response);
-
-                            Log.d("API", "formatted data into JSON");
-                            Log.d("API", jsonArray.toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("API_ERROR", error.toString());
-                Log.d("API_ERROR", "Error code: " + error.networkResponse.statusCode);
-            }
-        });
 
 
-
-        queue.add(stringRequest);
+//        queue.add(stringRequest);
 
 
         //*********************************************************
